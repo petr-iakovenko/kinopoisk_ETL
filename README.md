@@ -12,7 +12,8 @@ Processed data will be uploaded to this database
 
 1. To get data from kinopoisk use library `pip install kinopoisk-dev`.
 2. Connecting to API Kinopoisk for get data  
-\```
+
+\```python
 from kinopoisk_dev import KinopoiskDev, MovieParams, MovieField
 
 kp = KinopoiskDev(token='ZVEPHXS-QHPMTZ7-NC8ED8G-?????')
