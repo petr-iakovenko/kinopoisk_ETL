@@ -32,3 +32,9 @@ df = pd.DataFrame(item) # to dataframe
 df_main_movies = df.at[4, 1]
 df_main_movies = pd.DataFrame(df_main_movies)
 ```
+4. To check data.
+```python
+df_main_movies
+```
+Get 250 rows × 39 columns
+![df_main_movies](https://www.example.com/image.jpg)
