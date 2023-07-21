@@ -37,4 +37,4 @@ df_main_movies = pd.DataFrame(df_main_movies)
 df_main_movies
 ```
 Get 250 rows × 39 columns
-![df_main_movies](https://www.example.com/image.jpg)
+![df_main_movies](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/screenshot_df_main_movies.png)
