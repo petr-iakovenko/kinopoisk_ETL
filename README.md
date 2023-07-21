@@ -5,6 +5,21 @@
 ### 1. Create and run in docker new database - postgres
 
 1. Use run docker-compose `docker-compose up -d`
-2. Container check `docker ps -a `
-Processed data will be uploaded to this database
+2. Container check `docker ps -a `  
+Processed data will be uploaded to this database  
+
 ### 2. Use Jupyter Notebook for write ET(extract, load) code.
+
+1. To get data from kinopoisk use library `pip install kinopoisk-dev`.
+2. Connecting to API Kinopoisk for get data  
+`
+from kinopoisk_dev import KinopoiskDev, MovieParams, MovieField
+
+kp = KinopoiskDev(token='ZVEPHXS-QHPMTZ7-NC8ED8G-?????')
+item = kp.find_many_movie(
+        params=[
+            MovieParams(keys=MovieField.PAGE, value=1),
+            MovieParams(keys=MovieField.LIMIT, value=250),
+        ]
+    )
+`
