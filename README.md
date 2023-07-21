@@ -24,3 +24,12 @@ item = kp.find_many_movie(
         ]
     )
 ```
+
+3. Transform data from kinopoisk to DataFrame.
+```python
+import pandas as pd
+df = pd.DataFrame(item) # to dataframe
+df_main_movies = df.at[4, 1]
+df_main_movies = pd.DataFrame(df_main_movies)
+df_main_movies # show inside data kinopoisk
+```
