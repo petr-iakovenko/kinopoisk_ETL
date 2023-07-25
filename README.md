@@ -54,7 +54,6 @@ def rename_columns_df_main_movies(film_stg):
 
 def update_rows_df_main_movies(film_stg):
     """ return DF with updated rows"""
-     # give amount of columns
     amount_columns = df_main_movies.columns
     columns = [x[0] for x in df_main_movies.values[0]]
     for i in range(len(amount_columns)): # iterating by number of columns
