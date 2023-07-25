@@ -83,4 +83,5 @@ df_main_movies = del_trash_df_main_movies(df_main_movies)
 ```python
 df_main_movies
 ```
-
+Get 250 rows × 11 columns
+![df_main_movies](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/6.%20To%20check%20data.png)
