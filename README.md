@@ -11,7 +11,7 @@ Processed data will be uploaded to this database
 ### 2. Use Jupyter Notebook for write ET(extract, load) code.
 
 1. To get data from kinopoisk use library `pip install kinopoisk-dev`.
-2. Connecting to API Kinopoisk for get data  
+2. Connecting to API Kinopoisk for get data. 
 
 ```python
 from kinopoisk_dev import KinopoiskDev, MovieParams, MovieField
@@ -42,7 +42,7 @@ df_main_movies
 Get 250 rows × 39 columns
 ![df_main_movies](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/screenshot_df_main_movies.png)
 
-5. Update df_main_movies 
+5. Update df_main_movies. 
 
 ```python
 def rename_columns_df_main_movies(film_stg):
@@ -84,3 +84,21 @@ df_main_movies
 ```
 Get 250 rows × 11 columns
 ![df_main_movies](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/6.%20To%20check%20data.png)
+
+7. Transform column 'releaseYears' in DF 'df_main_movies'.
+```python
+releaseYears = df_main_movies['releaseYears'] # Series
+col = len(releaseYears)
+for n in range(col):
+    object_ = releaseYears.loc[n]
+    if object_ is None:
+        pass
+    elif len(object_) == 0:
+         releaseYears.loc[n] = None
+    else:
+        for i in range(len(releaseYears.loc[n])):
+            first = str(object_[i]).find("(")
+            j = str(object_[i])[first+1:]
+            j = j.split()
+            releaseYears.loc[n] = j
+```
