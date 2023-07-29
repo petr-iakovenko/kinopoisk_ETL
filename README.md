@@ -156,5 +156,5 @@ df_externalId
 ```
 
 Get 250 rows × 3 columns
-![df_externalId](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/10.Check%20data%20df_externalId.png)
+![df_externalId](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/10.%20Check%20data%20df_externalId.png)
 
