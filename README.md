@@ -102,3 +102,55 @@ for n in range(col):
             j = j.split()
             releaseYears.loc[n] = j
 ```
+
+8. Create func for transform rows 
+```python
+def names_rows(name_col, name_df):
+    """return list for update dataframe"""
+    full_list_rows_df = name_df[name_col].to_list() # to list full data from "name_df" for transform
+    final_list_rows_df = []
+    for rows_df in full_list_rows_df:
+        new_list_rows_df_1 = (str(rows_df)).split(' ')
+        for items_rows_df in new_list_rows_df_1:
+            new_list_rows_df_2 = items_rows_df.split('=')
+            for index in range(len(new_list_rows_df_2)):
+                new_list_rows_df_2[index] = new_list_rows_df_2[index].replace("'",'')
+            final_list_rows_df.append(new_list_rows_df_2)
+    return final_list_rows_df
+```
+
+9. Create and update table "externalId"
+```python
+def create_and_upgrade_df_externalId(raw_names_list):
+    """return df_externalId with new columns and rows"""
+    names_rows_list = [x for x in raw_names_list] # give list with names rows
+    """ names_rows_list = [['kpHD', '4127663ed234fa8584aeb969ceb02cd8'], ['imdb', 'tt1675434'], ['tmdb', '77338'],......]"""
+    names_columns_list = [x[0] for x in raw_names_list][0:3] # give list with names table "['kpHD', 'imdb', 'tmdb']"
+    items_kpHD_list_ = []
+    items_imdb_list_ = []
+    items_tmdb_list_ = []
+    for items in names_rows_list:
+      if items[0] == names_columns_list[0]:
+          items_kpHD_list_.append(items[1])
+      elif items[0] == names_columns_list[1]:
+          items_imdb_list_.append(items[1])
+      elif items[0] == names_columns_list[2]:
+          items_tmdb_list_.append(items[1])
+    df_externalId.insert(loc=1, column=names_columns_list[0], value=items_kpHD_list_) # insert value rows in columns for DF "externalId"
+    df_externalId.insert(loc=1, column=names_columns_list[1], value=items_imdb_list_)
+    df_externalId.insert(loc=1, column=names_columns_list[2], value=items_tmdb_list_)
+    del df_externalId[df_externalId.columns [0]]
+    return df_externalId
+
+
+df_externalId = df_main_movies.pop('externalId') # execute column "externalId" from "film_stg" for create new table "df_externalId"
+df_externalId = pd.DataFrame(df_externalId)
+raw_names_list = names_rows('externalId', df_externalId) # call def names_rows() for transform raw data from "df_externalId" and append into list "names"
+
+df_externalId = create_and_upgrade_df_externalId(raw_names_list)
+```
+10. To check data.
+
+```python
+df_externalId
+```
