@@ -154,3 +154,7 @@ df_externalId = create_and_upgrade_df_externalId(raw_names_list)
 ```python
 df_externalId
 ```
+
+Get 250 rows × 3 columns
+![df_externalId](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/10.Check%20data%20df_externalId.png)
+
