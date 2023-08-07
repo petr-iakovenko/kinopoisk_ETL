@@ -158,3 +158,53 @@ df_externalId
 Get 250 rows × 3 columns
 ![df_externalId](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/10.%20Check%20data%20df_externalId.png)
 
+11. Create func for for transform DataFrame "df_rating".
+```python
+def create_and_upgrade_df_rating(raw_names_list):
+    """return df_rating with new columns and rows"""
+    names_rows_list = [x for x in raw_names_list] # give list with names rows
+    """ names_rows_list = [['kpHD', '4127663ed234fa8584aeb969ceb02cd8'], ['imdb', 'tt1675434'], ['tmdb', '77338'],......]"""
+    names_columns_list = [x[0] for x in raw_names_list][0:6] # give list with names table "['kp', 'imdb', 'tmdb', 'filmCritics', 'russianFilmCritics', 'await_']"
+    items_kp_list_ = []
+    items_imdb_list_ = []
+    items_tmdb_list_ = []
+    items_filmCritics_list_ = []
+    items_russianFilmCritics_list_ = []
+    items_await_list_ = []
+    for items in names_rows_list:
+      if items[0] == names_columns_list[0]:
+          items_kp_list_.append(items[1])
+      elif items[0] == names_columns_list[1]:
+          items_imdb_list_.append(items[1])
+      elif items[0] == names_columns_list[2]:
+          items_tmdb_list_.append(items[1])
+      elif items[0] == names_columns_list[3]:
+          items_filmCritics_list_.append(items[1])
+      elif items[0] == names_columns_list[4]:
+          items_russianFilmCritics_list_.append(items[1])
+      elif items[0] == names_columns_list[5]:
+          items_await_list_.append(items[1])
+    df_rating.insert(loc=1, column=names_columns_list[0], value=items_kp_list_) # insert value rows in columns for DF "externalId"
+    df_rating.insert(loc=1, column=names_columns_list[1], value=items_imdb_list_)
+    df_rating.insert(loc=1, column=names_columns_list[2], value=items_tmdb_list_)
+    df_rating.insert(loc=1, column=names_columns_list[3], value=items_filmCritics_list_)
+    df_rating.insert(loc=1, column=names_columns_list[4], value=items_russianFilmCritics_list_)
+    df_rating.insert(loc=1, column=names_columns_list[5], value=items_await_list_)
+    del df_rating[df_rating.columns [0]]
+    return df_rating
+
+
+df_rating = df_main_movies.pop('rating') # execute column "rating" from "film_stg" for create new table "df_rating"
+df_rating = pd.DataFrame(df_rating) # Series to DF for next stroke
+raw_names_list = names_rows('rating', df_rating) # call def names_rows() for transform raw data from "df_rating" and append into list "names"
+df_rating = create_and_upgrade_df_rating(raw_names_list)
+```
+
+12. To check data.
+
+```python
+df_rating
+```
+
+Get 250 rows × 6 columns
+![df_rating](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/12.%20Check%20data%20df_reting.png)
