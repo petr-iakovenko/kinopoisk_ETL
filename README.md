@@ -254,3 +254,15 @@ df_main_movies # checking data in main DataFrame df_main_movies
 
 250 rows × 7 columns      
 ![df_main_movies](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/16.%20Check%20data%20df_main_movies.png)
+
+For next step I will can using save data from DataFrame to csv. 
+
+```python
+df_externalId.to_csv('externalId.csv')
+df_rating.to_csv('df_rating.csv')
+df_genres.to_csv('genres.csv')
+df_countries.to_csv('countries.csv')
+df_main_movies.to_csv('stg.csv')
+```
+
+and load csv-files to some database
