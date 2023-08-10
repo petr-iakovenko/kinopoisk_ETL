@@ -25,7 +25,7 @@ item = kp.find_many_movie(
     )
 ```
 
-3. Transform data from kinopoisk to DataFrame.
+3. Transforming data from last step(2.) to DataFrame 'df_main_movies'.
 
 ```python
 import pandas as pd
@@ -34,7 +34,7 @@ df_main_movies = df.at[4, 1]
 df_main_movies = pd.DataFrame(df_main_movies)
 ```
 
-4. To check data.
+4. Checking data in DataFrame 'df_main_movies'.
 
 ```python
 df_main_movies
@@ -42,7 +42,7 @@ df_main_movies
 Get 250 rows × 39 columns
 ![df_main_movies](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/screenshot_df_main_movies.png)
 
-5. Update df_main_movies. 
+5. Updating data in DataFrame 'df_main_movies'. 
 
 ```python
 def rename_columns_df_main_movies(film_stg):
@@ -77,7 +77,7 @@ df_main_movies = update_rows_df_main_movies(df_main_movies)
 df_main_movies = del_trash_df_main_movies(df_main_movies)
 ```
 
-6. To check data.
+6. Checking data in DataFrame 'df_main_movies'.
 
 ```python
 df_main_movies
@@ -85,7 +85,7 @@ df_main_movies
 Get 250 rows × 11 columns
 ![df_main_movies](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/6.%20To%20check%20data.png)
 
-7. Transform column 'releaseYears' in DF 'df_main_movies'.
+7. Transforming column 'releaseYears' in DataFrame 'df_main_movies'.
 ```python
 releaseYears = df_main_movies['releaseYears'] # Series
 col = len(releaseYears)
@@ -103,7 +103,7 @@ for n in range(col):
             releaseYears.loc[n] = j
 ```
 
-8. Create func for transform rows 
+8. Creating function for transform rows. 
 ```python
 def names_rows(name_col, name_df):
     """return list for update dataframe"""
@@ -119,7 +119,7 @@ def names_rows(name_col, name_df):
     return final_list_rows_df
 ```
 
-9. Create and update table "externalId"
+9. Creating and updating table 'externalId' in DataFrame 'df_externalId'
 ```python
 def create_and_upgrade_df_externalId(raw_names_list):
     """return df_externalId with new columns and rows"""
@@ -149,7 +149,7 @@ raw_names_list = names_rows('externalId', df_externalId) # call def names_rows()
 
 df_externalId = create_and_upgrade_df_externalId(raw_names_list)
 ```
-10. To check data.
+10. Checking data in DataFrame 'df_externalId'.
 
 ```python
 df_externalId
@@ -158,7 +158,7 @@ df_externalId
 Get 250 rows × 3 columns
 ![df_externalId](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/10.%20Check%20data%20df_externalId.png)
 
-11. Create func for for transform DataFrame "df_rating".
+11. Creating function for transform DataFrame "df_rating".
 ```python
 def create_and_upgrade_df_rating(raw_names_list):
     """return df_rating with new columns and rows"""
@@ -200,7 +200,7 @@ raw_names_list = names_rows('rating', df_rating) # call def names_rows() for tra
 df_rating = create_and_upgrade_df_rating(raw_names_list)
 ```
 
-12. To check data.
+12. Checking data in DataFrame 'df_rating'.
 
 ```python
 df_rating
@@ -208,3 +208,49 @@ df_rating
 
 Get 250 rows × 6 columns
 ![df_rating](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/12.%20Check%20data%20df_reting.png)
+
+13. Creating function for transform data and create DataFrame.
+
+```python
+def names_list(name_col):
+    """ return DF where in data deleted "'" """
+    df_name_col = df_main_movies.pop(name_col)
+    df_name_col = pd.DataFrame(df_name_col)
+    col = range(len(df_name_col))
+    for index in col:
+        object_ = df_name_col.loc[index]
+        object_ = object_.tolist()
+        for i in range(len(object_[0])):
+            first_simbol = str(object_[0][i]).find("'")
+            last_simbol  = str(object_[0][i]).rfind("'")
+            j = str(object_[0][i])[first_simbol +1:last_simbol ]
+            object_[0][i] = j
+    return df_name_col
+```
+
+14. Use func 'names_list()' for transform data and creating DataFrame 'df_genres'. Checking data in created DataFrame 'df_genres'.
+
+```python
+df_genres = names_list('genres') # use func for transform data and create DataFrame df_genres
+df_genres
+```
+250 rows × 1 columns
+![df_genres](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/14.%20Check%20data%20df_genres.png)
+
+15. Use func 'names_list()' for transform data and creating DataFrame 'df_countries'. Checking data in created DataFrame 'df_countries'.
+
+```python
+df_countries = names_list('countries') # use func for transform data and create DataFrame df_countries
+df_countries
+```
+250 rows × 1 columns
+![df_countries](https://github.com/petr-iakovenko/kinopoisk_ETL#:~:text=15.%20Check%20data%20df_countries.png)
+
+16. Checking data in main DataFrame 'df_main_movies'.
+
+```python
+df_main_movies # checking data in main DataFrame df_main_movies
+```
+
+250 rows × 7 columns
+![df_main_movies](https://github.com/petr-iakovenko/kinopoisk_ETL#:~:text=16.%20Check%20data%20df_main_movies.png)
