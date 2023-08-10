@@ -234,7 +234,7 @@ def names_list(name_col):
 df_genres = names_list('genres') # use func for transform data and create DataFrame df_genres
 df_genres
 ```
-250 rows × 1 columns
+250 rows × 1 columns    
 ![df_genres](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/14.%20Check%20data%20df_genres.png)
 
 15. Use func 'names_list()' for transform data and creating DataFrame 'df_countries'. Checking data in created DataFrame 'df_countries'.
@@ -243,7 +243,7 @@ df_genres
 df_countries = names_list('countries') # use func for transform data and create DataFrame df_countries
 df_countries
 ```
-250 rows × 1 columns
+250 rows × 1 columns    
 ![df_countries](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/15.%20Check%20data%20df_countries.png)
 
 16. Checking data in main DataFrame 'df_main_movies'.
@@ -252,5 +252,5 @@ df_countries
 df_main_movies # checking data in main DataFrame df_main_movies
 ```
 
-250 rows × 7 columns
+250 rows × 7 columns      
 ![df_main_movies](https://github.com/petr-iakovenko/kinopoisk_ETL/blob/main/16.%20Check%20data%20df_main_movies.png)
